@@ -1,0 +1,19 @@
+{
+  "name": "@danasilver/github-package-example",
+  "version": "1.0.0",
+  "description": "Example package published to GitHub's npm registry.",
+  "license": "ISC",
+  "author": "danasilver",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danasilver/github-package-example.git"
+  },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/"
+  }
+}
