@@ -1,6 +1,6 @@
 {
   "name": "@danasilver/github-package-example",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Example package published to GitHub's npm registry.",
   "license": "ISC",
   "author": "danasilver",
