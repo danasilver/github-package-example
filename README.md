@@ -28,8 +28,9 @@ It's useful to share private packages within an organization. The setup here att
    ```
 
 3. Install [Changesets' automation](https://github.com/changesets/changesets/blob/main/docs/automating-changesets.md)
-   a. Install the [changeset bot](https://github.com/apps/changeset-bot), which will comment on PRs to nudge/facilitate adding changesets
-   b. Add the [changeset action](https://github.com/changesets/action) to automate bumping versions, maintaining the changelog, and publishing to GitHub packages. See [release.yml](./.github/workflows/release.yml) for an example.
+
+   1. Install the [changeset bot](https://github.com/apps/changeset-bot), which will comment on PRs to nudge/facilitate adding changesets
+   2. Add the [changeset action](https://github.com/changesets/action) to automate bumping versions, maintaining the changelog, and publishing to GitHub packages. See [release.yml](./.github/workflows/release.yml) for an example.
 
 4. In the repository under **Settings > Actions > General**, enable "Allow GitHub Actions to create and approve pull requests" to allow the changeset action to create the versioning PR.
 
