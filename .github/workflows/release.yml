@@ -30,7 +30,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: changeset publish
+          publish: npx @changesets/cli publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
