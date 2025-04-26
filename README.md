@@ -12,10 +12,9 @@ An example NPM package published to GitHub packages using [changesets](https://g
 
 It's useful to share private packages within an organization. The setup here attempts to do so with a few goals in mind:
 
-- **Automate releases** by building and publishing on a CI
-- **Follow [SemVer](https://semver.org)** without individuals needing to keep track of changes
-- **Follow [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow)**, a common branch-based workflow. This means changes go through pull requests and approvals; no need to ever push to _main_
-- **_main_ is the source of truth** so it's trivial to develop downstream packages against unreleased changes - just point to _main_ (more on this below)
+- **Automated releases** built and published on a CI. Running the build and publish on GitHub Actions means consistent builds and no special setup on a developer's machine to release.
+- **Intuitive versioning and a changelog** with a low maintenance cost. Changesets automates both of these, so there's no need for a maintainer to collect changes, determine version number bumps, or write release notes.
+- **Development against unreleased changes** is possible by pointing at _main_ or a work-in-progress branch (more on this below).
 
 ## Setup
 
@@ -46,8 +45,40 @@ The following require a GitHub Team or Enterprise account.
 - Enable branch protection for _main_
 - Require a pull request (and approvals) before merging into _main_
 
-## Release Workflow
+## Development and Release Workflow
 
-## Not in Scope
+## Developing Against Unreleased Changes
 
-- Publishing public packages to NPM. This is already a well-defined workflow [supported by Changesets](https://github.com/changesets/changesets/blob/main/docs/intro-to-using-changesets.md).
+Suppose you're modifying a shared package used by a downstream service. You want to test the shared package's changes in the service without publishing the work in progress.
+
+**Important:** Take care not commit these changes. Always point to a stable released version of a dependency in a production artifact.
+
+### Point to local changes
+
+In _package.json_:
+
+```json
+"dependencies": {
+  "shared-packages": "file:../shared-package"
+}
+```
+
+### Point to Git remote changes
+
+See [NPM's documentation](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#git-urls-as-dependencies) for more examples.
+
+In _package.json_, for any Git remote the following works:
+
+```json
+"dependencies": {
+  "shared-package": "git+ssh://git@github.com:my-org/shared-package.git#v1.0.27"
+}
+```
+
+or for a GitHub repository use the simplified form:
+
+```json
+"dependencies": {
+  "shared-package": "my-org/shared-package.git#feature\/branch"
+}
+```
