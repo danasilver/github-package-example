@@ -35,7 +35,6 @@ It's useful to share private packages within an organization. The setup here att
    3. Add the [changeset action](https://github.com/changesets/action) to automate bumping versions, maintaining the changelog, and publishing to GitHub packages. See [release.yml](./.github/workflows/release.yml) for an example. If you want to automatically publish when a changesets-generated PR is merged, make sure to use the `publish` option.
 
 4. In the repository under **Settings > Actions > General**, enable "Allow GitHub Actions to create and approve pull requests" to allow the changeset action to create the versioning PR.
-
 ![Workflow permissions](./doc/action-permissions.png)
 
 ### Optional but recommended
@@ -46,6 +45,21 @@ The following require a GitHub Team or Enterprise account.
 - Require a pull request (and approvals) before merging into _main_
 
 ## Development and Release Workflow
+
+1. Make some changes in the shared package following [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow) (create a branch, open a Pull Request)
+
+2. The changesets bot will comment on the PR, prompting you to add a changeset if one does not already exist
+![Changeset bot comment](./doc/changeset-bot-comment.png)
+
+3. Follow "Click here if you're a maintainer to add a changeset..." and create a changeset in the web editor. Use one of **patch**, **minor**, or **major** to indicate what kind of version bump is necessitated by the PR. Optionally, update the changelog entry.
+![Changeset web editor](./doc/changeset-web-editor.png)
+
+4. Commit the changeset to the branch with the existing PR, get any approvals necessary, and merge to _main_.
+
+5. When the changeset action runs, it'll create a second PR that bumps the package's version and collects any changelog entries. This PR will collect any subsequent unreleased changes.
+![Changeset release pull request](./doc/changeset-release-pr.png)
+
+6. When you're ready to release, merge the changeset-generated PR back into main. This time, the changeset action will release to GitHub packages.
 
 ## Developing Against Unreleased Changes
 
